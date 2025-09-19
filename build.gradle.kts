@@ -81,23 +81,6 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
-tasks.register("publishToMavenCentral") {
-    dependsOn("publishMavenPublicationToLocalRepository")
-
-    doLast {
-        providers.exec {
-            commandLine("sh", "-c", "cd build/repo && zip -r ../../build.zip ./*")
-        }
-        providers.exec {
-            commandLine(
-                "sh",
-                "-c",
-                "curl --request POST --verbose --header 'Authorization: Bearer ${System.getenv("MAVEN_USER_TOKEN")}' --form bundle=@build.zip https://central.sonatype.com/api/v1/publisher/upload"
-            )
-        }
-    }
-}
-
 signing {
     useGpgCmd()
 }
@@ -105,8 +88,8 @@ signing {
 publishing {
     repositories {
         maven {
-            name = "Local"
-            url = File("${project.layout.buildDirectory.get()}/repo").toURI()
+            name = "local"
+            url = uri(layout.buildDirectory.dir("repos/local"))
         }
     }
     publications {
@@ -131,6 +114,10 @@ publishing {
                 developers {
                     developer {
                         id = "Lyzev"
+                        name = "Lyzev"
+                        email = "69327579+Lyzev@users.noreply.github.com"
+                        organization = "SchizoidDevelopment"
+                        organizationUrl = "https://github.com/SchizoidDevelopment"
                     }
                 }
                 scm {

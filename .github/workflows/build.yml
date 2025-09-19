@@ -35,8 +35,17 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: build/libs/*
-      - name: Upload maven artifacts
-        if: ${{ hashFiles('build.zip') != '' }}
-        uses: actions/upload-artifact@v4
-        with:
-            path: build.zip
+      - name: Create bundle.zip
+        if: inputs.build-command == 'publishMavenPublicationToLocalRepository'
+        run: |
+            cd build/repos/local
+            zip -r ../../../bundle.zip .
+            cd ../../..
+      - name: Upload to Maven Central Portal
+        if: inputs.build-command == 'publishMavenPublicationToLocalRepository'
+        run: |
+            curl --request POST \
+            --verbose \
+            --header "Authorization: Bearer $MAVEN_USER_TOKEN" \
+            --form bundle=@bundle.zip \
+            https://central.sonatype.com/api/v1/publisher/upload?publishingType=USER_MANAGED
