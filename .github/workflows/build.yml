@@ -36,7 +36,7 @@ jobs:
         with:
           path: build/libs/*
       - name: Upload maven artifacts
-        if: ${{ exists('build.zip') }}
+        if: ${{ hashFiles('build.zip') != '' }}
         uses: actions/upload-artifact@v4
         with:
             path: build.zip
