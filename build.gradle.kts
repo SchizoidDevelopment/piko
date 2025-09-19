@@ -94,6 +94,9 @@ tasks.register("publishToMavenCentral") {
                 "-c",
                 "curl --request POST --verbose --header 'Authorization: Bearer ${System.getenv("MAVEN_USER_TOKEN")}' --form bundle=@build.zip https://central.sonatype.com/api/v1/publisher/upload"
             )
+            standardOutput = System.out
+            errorOutput = System.err
+            isIgnoreExitValue = false
         }
     }
 }
