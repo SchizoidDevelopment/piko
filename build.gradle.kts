@@ -106,7 +106,7 @@ publishing {
     repositories {
         maven {
             name = "Local"
-            url = URI("file://${project.layout.buildDirectory.get()}/repo")
+            url = File("${project.layout.buildDirectory.get()}/repo").toURI()
         }
     }
     publications {
