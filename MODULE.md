@@ -116,10 +116,10 @@ class TestEventListener : EventListener {
     var handle = true
 
     init {
-        on<TestEvent>(Event.Priority.HIGH) { event ->
-            if (event.a == 5)
-                event.isCancelled = true
-            println("TestEvent: ${event.a}")
+        on<TestEvent>(Event.Priority.HIGH) {
+            if (a == 5)
+                isCancelled = true
+            println("TestEvent: $a")
         }
     }
 
@@ -212,10 +212,10 @@ class TestEventListener : EventListener {
     var handle = true
 
     init {
-        on<TestEvent>(Event.Priority.HIGH) { event ->
-            if (event.a == 5)
-                event.isCancelled = true
-            println("TestEvent: ${event.a}")
+        on<TestEvent>(Event.Priority.HIGH) {
+            if (a == 5)
+                isCancelled = true
+            println("TestEvent: $a")
         }
     }
 

@@ -34,9 +34,9 @@ class EventCancellationTest {
 
         object : EventListener {
             init {
-                on<TestEvent>(Event.Priority.HIGH) { event ->
+                on<TestEvent>(Event.Priority.HIGH) {
                     highPriorityHandled = true
-                    event.isCancelled = true
+                    isCancelled = true
                 }
                 on<TestEvent>(Event.Priority.LOW) {
                     lowPriorityHandled = true

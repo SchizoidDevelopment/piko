@@ -33,8 +33,8 @@ class EventManagerBenchmarkTest {
             init {
                 val event = TestEvent(5)
 
-                on<TestEvent>(Event.Priority.HIGH) { event ->
-                    if (event.a == 5) event.isCancelled = true
+                on<TestEvent>(Event.Priority.HIGH) {
+                    if (a == 5) isCancelled = true
                 }
 
                 val time = measureNanoTime {

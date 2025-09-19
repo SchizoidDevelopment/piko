@@ -37,5 +37,5 @@ interface EventListener {
  */
 inline fun <reified E : Event> EventListener.on(
     priority: Event.Priority = Event.Priority.MID,
-    noinline block: (E) -> Unit
+    noinline block: E.() -> Unit
 ) = EventManager.on(this, priority, block)
